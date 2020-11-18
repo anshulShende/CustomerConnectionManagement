@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource({"classpath:com/tcs/caseStudy/application.properties"})
-@ComponentScan(basePackages = "com.tcs")
+@ComponentScan(basePackages = "com.tcs.caseStudy")
 @EnableTransactionManagement
 public class BaseConfig {
 
