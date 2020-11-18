@@ -1,0 +1,80 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entity">
+    <resultMap id="entityMap" type="com.tcs.caseStudy.dto.database.EntityDTO">
+        <result property="id" column="id"/>
+        <result property="name" column="name" />
+        <result property="phone" column="phone" />
+        <result property="email" column="email" />
+        <result property="gender" column="gender" />
+        <result property="role" column="role" />
+        <result property="password" column="password"/>
+    </resultMap>
+
+    <select id="getEntityDetails" resultMap="entityMap">
+        SELECT
+        <include refid="entityColumns" />
+        FROM entities
+        <where>
+            1=1
+            <if test="email != null">
+                AND email = #{email}
+            </if>
+            <if test="password != null">
+                AND password = #{password}
+            </if>
+            <if test="role != null">
+                AND role = #{role}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertEntityDetail" parameterType="com.tcs.caseStudy.dto.database.EntityDTO">
+        INSERT INTO accessory_detail(
+        name,phone,email,gender,role,password
+        )
+        VALUES(
+            #{item.name},
+            #{item.phone},
+            #{item.email},
+            #{item.gender},
+            #{item.role},
+            #{item.password}
+        )
+    </insert>
+
+    <update id="updateEntity">
+        UPDATE entities
+        <set>
+            id=id
+            <if test="name != null">
+                ,name = #{name}
+            </if>
+            <if test="gender != null">
+                ,gender = #{gender}
+            </if>
+            <if test="phone != null">
+                ,phone = #{phone}
+            </if>
+            <if test="email != null">
+                ,email = #{email}
+            </if>
+            <if test="password != null">
+                ,password = #{password}
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <delete id="deleteEntity">
+        DELETE FROM entities
+        <where>
+            id=#{id}
+        </where>
+    </delete>
+
+    <sql id="entityColumns">
+        id,name,phone,email,gender,role,password
+    </sql>
+</mapper>
