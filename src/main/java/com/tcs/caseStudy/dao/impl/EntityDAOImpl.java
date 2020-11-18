@@ -5,11 +5,13 @@ import com.tcs.caseStudy.dto.database.EntityDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class EntityDAOImpl extends SqlSessionDaoSupport implements EntityDAO {
 
     @Autowired
@@ -18,7 +20,7 @@ public class EntityDAOImpl extends SqlSessionDaoSupport implements EntityDAO {
     }
 
     @Override
-    public List<EntityDAO> getEntities(String email, String password, String role) {
+    public List<EntityDTO> getEntities(String email, String password, String role) {
         Map<String, Object> inputMap = new HashMap<>();
         inputMap.put("email", email);
         inputMap.put("password", password);
