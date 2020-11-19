@@ -76,8 +76,8 @@ public class EntityController {
     public ResponseEntity updateEntity(@RequestBody EntityClientDTO entity,
                    @RequestParam("updater") EntityRole updater) {
         try {
-            entityService.updateEntity(entity, updater);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            EntityDTO entityDTO = entityService.updateEntity(entity, updater);
+            return ResponseEntity.status(HttpStatus.OK).body(entityDTO);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
