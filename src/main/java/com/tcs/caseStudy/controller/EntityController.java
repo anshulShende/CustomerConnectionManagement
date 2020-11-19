@@ -30,7 +30,7 @@ public class EntityController {
             EntityDTO entity = entityService.authenticateEntity(email, password, role);
             return ResponseEntity.status(HttpStatus.OK).body(entity);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
 
@@ -42,7 +42,7 @@ public class EntityController {
             List<EntityDTO> entity = entityService.getAllEntities();
             return ResponseEntity.status(HttpStatus.OK).body(entity);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -54,7 +54,7 @@ public class EntityController {
             EntityDTO entity = entityService.fetchEntity(id);
             return ResponseEntity.status(HttpStatus.OK).body(entity);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -66,7 +66,20 @@ public class EntityController {
             entityService.registerEntity(entity);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @CrossOrigin
+    @PostMapping(path = "/updateEntity")
+    @ApiOperation(value = "Update Entity")
+    public ResponseEntity updateEntity(@RequestBody EntityClientDTO entity,
+                   @RequestParam("updater") EntityRole updater) {
+        try {
+            entityService.updateEntity(entity, updater);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -74,12 +87,12 @@ public class EntityController {
     @PostMapping(path = "/deleteEntity")
     @ApiOperation(value = "register Entities")
     public ResponseEntity deleteEntity(@RequestParam("id") Integer id,
-                   @RequestHeader("role") EntityRole role) {
+                   @RequestParam("role") EntityRole role) {
         try {
             entityService.deleteEntity(id, role);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 

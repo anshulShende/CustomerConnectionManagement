@@ -32,16 +32,16 @@
     </select>
 
     <insert id="insertEntityDetail" parameterType="com.tcs.caseStudy.dto.database.EntityDTO">
-        INSERT INTO accessory_detail(
+        INSERT INTO entities(
         name,phone,email,gender,role,password
         )
         VALUES(
-            #{item.name},
-            #{item.phone},
-            #{item.email},
-            #{item.gender},
-            #{item.role},
-            #{item.password}
+            #{name},
+            #{phone},
+            #{email},
+            #{gender},
+            #{role},
+            #{password}
         )
     </insert>
 
