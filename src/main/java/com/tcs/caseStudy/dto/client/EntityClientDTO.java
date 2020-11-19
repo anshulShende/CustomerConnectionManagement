@@ -12,6 +12,7 @@ import javax.management.relation.Role;
 @AllArgsConstructor
 @Builder
 public class EntityClientDTO {
+    private Integer id;
     private String name;
     private String email;
     private String phone;

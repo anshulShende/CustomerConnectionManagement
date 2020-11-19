@@ -1,6 +1,5 @@
 package com.tcs.caseStudy.service;
 
-
 import com.tcs.caseStudy.domain.EntityRole;
 import com.tcs.caseStudy.dto.client.EntityClientDTO;
 import com.tcs.caseStudy.dto.database.EntityDTO;
@@ -18,6 +17,9 @@ public interface EntityService {
 
     @Transactional
     void registerEntity(EntityClientDTO entity) throws Exception;
+
+    @Transactional
+    EntityDTO updateEntity(EntityClientDTO entityClientDTO, EntityRole updater) throws Exception;
 
     void deleteEntity(Integer id, EntityRole role) throws Exception;
 

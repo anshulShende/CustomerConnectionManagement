@@ -5,6 +5,7 @@ import com.tcs.caseStudy.domain.EntityRole;
 import com.tcs.caseStudy.dto.client.EntityClientDTO;
 import com.tcs.caseStudy.dto.database.EntityDTO;
 import com.tcs.caseStudy.service.EntityService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +52,22 @@ public class EntityServiceImpl implements EntityService {
                 .phone(entity.getPhone()).gender(entity.getGender()).role(entity.getRole())
                 .password(entity.getPassword()).build();
         entityDAO.insertEntity(entityDTO);
+    }
+
+    @Override
+    @Transactional
+    public EntityDTO updateEntity(EntityClientDTO entityClientDTO, EntityRole updater) throws Exception {
+        if(updater.equals(EntityRole.Manager)){
+            throw new Exception("RelationShip Manager cannot update the data");
+        }
+        if(entityClientDTO.getId()==null){
+            throw new Exception("Entity id is mandatory for updating data");
+        }
+        EntityDTO entityDTO = EntityDTO.builder().id(entityClientDTO.getId()).name(entityClientDTO.getName())
+                .email(entityClientDTO.getEmail()).phone(entityClientDTO.getPhone()).gender(entityClientDTO.getGender())
+                .role(entityClientDTO.getRole()).password(entityClientDTO.getPassword()).build();
+        entityDAO.updateEntity(entityDTO);
+        return entityDAO.getEntities(entityClientDTO.getId(),null,null,null).get(0);
     }
 
     @Override
