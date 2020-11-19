@@ -16,6 +16,9 @@
         FROM entities
         <where>
             1=1
+            <if test="id != null">
+                AND id = #{id}
+            </if>
             <if test="email != null">
                 AND email = #{email}
             </if>

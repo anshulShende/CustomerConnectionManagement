@@ -20,8 +20,9 @@ public class EntityDAOImpl extends SqlSessionDaoSupport implements EntityDAO {
     }
 
     @Override
-    public List<EntityDTO> getEntities(String email, String password, String role) {
+    public List<EntityDTO> getEntities(Integer id, String email, String password, String role) {
         Map<String, Object> inputMap = new HashMap<>();
+        inputMap.put("id", id);
         inputMap.put("email", email);
         inputMap.put("password", password);
         inputMap.put("role", role);

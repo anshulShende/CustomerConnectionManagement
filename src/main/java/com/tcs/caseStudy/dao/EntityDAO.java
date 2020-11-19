@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EntityDAO {
 
-    List<EntityDTO> getEntities(String email, String password, String role);
+    List<EntityDTO> getEntities(Integer id, String email, String password, String role);
 
     void insertEntity(EntityDTO entityDTO);
 

@@ -1,6 +1,6 @@
 package com.tcs.caseStudy.domain;
 
-public enum role {
+public enum EntityRole {
     Admin,
     Customer,
     Manager
